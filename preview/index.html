@@ -20,6 +20,15 @@
       import { demoHistory } from "./demo-history.js";
 
       const params = new URLSearchParams(location.search);
+      // This fork: your own plan from private/home.neonplan.json (git-ignored) instead of the demo house, in Vietnamese.
+      // ?demo (or ?empty) shows the demo house as before; scripted browsers (screenshots, tutorials) always get it.
+      const ownPlan =
+        params.has("demo") || params.has("empty") || navigator.webdriver
+          ? null
+          : await fetch("../private/home.neonplan.json")
+              .then((r) => (r.ok ? r.json() : null))
+              .then((f) => f?.building ?? (f?.floors ? f : null))
+              .catch(() => null);
       // the power flow lines are on with ?flows (and off without, whatever an earlier page stored)
       try {
         localStorage.setItem("neonplan3d.flows", params.has("flows") ? "1" : "0");
@@ -51,7 +60,7 @@
         newsletter: params.has("shop") ? { url: "https://mastershort.de/neonplan3d/newsletter/" } : null,
         updates: params.has("shop") ? [{ id: "mastershort.kitchen", name: "Küche", release: 2, added: 10, at: Date.now() / 1000 - 600 }] : [],
       };
-      let building = params.has("empty") ? { version: 1, floors: [], settings: { wall_exterior: 0.24, wall_interior: 0.12, grid: 0.05 } } : DEMO_BUILDING;
+      let building = params.has("empty") ? { version: 1, floors: [], settings: { wall_exterior: 0.24, wall_interior: 0.12, grid: 0.05 } } : (ownPlan ?? DEMO_BUILDING);
       let revision = 1;
       // off like on a fresh installation; the screenshots switch it on through the editor
       const diag = { enabled: false };
@@ -86,7 +95,7 @@
       }
 
       const hass = {
-        language: params.get("lang") || "de",
+        language: params.get("lang") || (ownPlan ? "vi" : "de"),
         user: { is_admin: !params.has("user"), name: "Demo" },
         areas: DEMO_AREAS,
         floors: DEMO_FLOORS,
