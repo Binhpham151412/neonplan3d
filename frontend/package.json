@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "node serve.mjs",
     "build": "node build.mjs",
     "watch": "node build.mjs --watch",
     "test": "node --test \"src/**/*.test.ts\"",
