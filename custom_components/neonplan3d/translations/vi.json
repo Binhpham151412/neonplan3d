@@ -1,0 +1,63 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "NeonPlan 3D",
+        "description": "Thêm một trang vào thanh bên, nơi bạn vẽ ngôi nhà của mình và xem nó ở dạng 3D."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "NeonPlan 3D đã được thiết lập."
+    }
+  },
+  "services": {
+    "ask": {
+      "name": "Hỏi ngôi nhà",
+      "description": "Chuyển một câu đến các chế độ xem NeonPlan 3D đang mở: \"Hiển thị phòng khách\" sẽ hiển thị phòng đó, còn câu hỏi do các mô-đun đã cài đặt trả lời (\"Những gì đang mở?\"). Chế độ xem đầu tiên hiểu được câu sẽ trả lời.",
+      "fields": {
+        "text": {
+          "name": "Câu",
+          "description": "Điều cần hiển thị hoặc hỏi, theo cách bạn vẫn nói."
+        },
+        "screen": {
+          "name": "Màn hình",
+          "description": "Chỉ chế độ xem có tên màn hình này phản hồi (đặt trong cài đặt của chế độ xem hoặc tùy chọn screen của thẻ). Để trống: mọi chế độ xem đang mở."
+        },
+        "speak": {
+          "name": "Đọc to",
+          "description": "Chế độ xem đọc câu trả lời bằng chức năng chuyển văn bản thành giọng nói của Assist (tắt: chỉ hiển thị câu trả lời)."
+        }
+      }
+    },
+    "announce": {
+      "name": "Thông báo",
+      "description": "Phát một thông điệp trên loa của các phòng trong mặt bằng, giống như mô-đun Thông báo (cần có mô-đun này). Mỗi phòng dùng loa đã chọn cho phòng, nếu không có thì dùng loa đặt trong phòng, nếu không có nữa thì dùng loa thuộc khu vực của phòng, cuối cùng là loa mặc định trong cài đặt của mô-đun.",
+      "fields": {
+        "message": {
+          "name": "Thông điệp",
+          "description": "Nội dung loa sẽ nói."
+        },
+        "rooms": {
+          "name": "Phòng",
+          "description": "Tên phòng trong mặt bằng (hoặc khu vực Home Assistant của phòng). Để trống: mọi phòng (của tầng, nếu có chỉ định tầng)."
+        },
+        "floor": {
+          "name": "Tầng",
+          "description": "Chỉ các phòng của tầng này (tên tầng trong mặt bằng)."
+        },
+        "ignore_quiet": {
+          "name": "Bỏ qua giờ yên tĩnh",
+          "description": "Phát cả trong những phòng đang ở giờ yên tĩnh. Một phòng duy nhất được gọi theo tên thì luôn phát."
+        },
+        "on_screens": {
+          "name": "Trên màn hình NeonPlan",
+          "description": "Mọi màn hình NeonPlan đang mở (kể cả máy tính bảng treo tường) tự đọc thông điệp và hiển thị nó. Nếu không chỉ định phòng hoặc tầng thì chỉ các màn hình đọc."
+        },
+        "screens": {
+          "name": "Màn hình",
+          "description": "Chỉ các màn hình NeonPlan có những tên màn hình này (đặt trong cài đặt của chế độ xem hoặc tùy chọn screen của thẻ)."
+        }
+      }
+    }
+  }
+}
